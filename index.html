@@ -7,487 +7,108 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary: #ff6b6b;
-            --secondary: #4dabf7;
-            --dark: #333;
-            --light: #f8f9fa;
-            --success: #28a745;
-            --warning: #ffc107;
-            --border: #dee2e6;
-            --text-dark: #2c3e50;
-            --text-light: #666;
+            --primary: #ff6b6b; --secondary: #4dabf7; --dark: #333; --light: #f8f9fa; --success: #28a745; --warning: #ffc107; --border: #dee2e6; --text-dark: #2c3e50; --text-light: #666;
         }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e3e8f0 100%);
-            min-height: 100vh;
-            color: var(--text-dark);
-            line-height: 1.5;
-        }
-        
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            background: white;
-            min-height: 100vh;
-        }
-        
-        /* 头部 */
-        .header {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
-            color: white;
-            padding: 25px 30px;
-            text-align: center;
-        }
-        
-        .header h1 {
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
-        
-        /* 步骤指示器 */
-        .steps {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin: 25px 20px;
-            padding: 0 20px;
-            flex-wrap: wrap;
-        }
-        
-        .step {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: #666;
-        }
-        
-        .step.active {
-            color: var(--primary);
-            font-weight: bold;
-        }
-        
-        .step-number {
-            width: 36px;
-            height: 36px;
-            background: #e9ecef;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
-        
-        .step.active .step-number {
-            background: var(--primary);
-            color: white;
-        }
-        
-        /* 主要内容区 - 改为三栏布局 */
-        .content {
-            display: grid;
-            grid-template-columns: 1fr 350px;
-            gap: 0;
-            min-height: 600px;
-        }
-        
-        @media (max-width: 992px) {
-            .content {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        /* 左侧选择区 */
-        .selection-area {
-            padding: 25px;
-            border-right: 1px solid var(--border);
-        }
-        
-        .section {
-            margin-bottom: 30px;
-        }
-        
-        .section-title {
-            font-size: 20px;
-            color: var(--dark);
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        /* 预设组合区 */
-        .preset-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-        
-        .preset-item {
-            background: white;
-            border: 2px solid var(--border);
-            border-radius: 12px;
-            padding: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-        
-        .preset-item:hover {
-            border-color: var(--secondary);
-            transform: translateY(-3px);
-        }
-        
-        .preset-item.selected {
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            border-color: var(--secondary);
-        }
-        
-        .preset-code {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 8px;
-            color: var(--text-dark);
-        }
-        
-        .pattern-container {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin: 8px 0;
-        }
-        
-        .pattern-char {
-            width: 24px;
-            height: 24px;
-            background: var(--secondary);
-            color: white;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: bold;
-        }
-        
-        /* 右侧区域 - 分为图片区和订单区 */
-        .right-area {
-            display: flex;
-            flex-direction: column;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        }
-        
-/*<!-- 图片展示区 -->*/
-<div class="image-display-area">
-    <h3><i class="fas fa-images"></i> 效果展示区</h3>
-    <div style="text-align: center; margin-bottom: 20px;">
-        <!-- 使用 jsDelivr CDN 链接，确保全球快速稳定访问 -->
-        <img id="productImage"
-             src="https://cdn.jsdelivr.net/gh/2945935725/tattoo-selector@main/%E6%96%B0%E7%89%88.jpg"
-             alt="纹身贴效果展示"
-             style="width: 100%; max-width: 600px; height: auto; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border: 1px solid #eee;">
-        <p style="color: #666; margin-top: 10px; font-size: 14px;">产品效果参考图</p>
-    </div>
-    <div class="image-upload-guide">
-        <h4><i class="fas fa-bolt"></i> 稳定加速访问</h4>
-        <p style="color: var(--text-light); font-size: 14px; line-height: 1.5;">
-            此图片已通过专业的 CDN 服务加速，确保在任何地区都能快速、稳定加载。
-        </p>
-        <p style="color: var(--text-light); font-size: 13px; margin-top: 10px;">
-            💡 未来如需更换图片，只需将新图片上传至仓库，并将上方链接中的 <code>%E6%96%B0%E7%89%88.jpg</code> 部分替换为新的文件名即可。
-        </p>
-    </div>
-</div>
-        
-        
-        /* 订单区 */
-        .order-area {
-            padding: 20px;
-            flex-grow: 1;
-        }
-        
-        .type-selector, .order-summary {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-        
-        .type-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 15px;
-        }
-        
-        .type-btn {
-            padding: 15px;
-            border: 2px solid var(--border);
-            border-radius: 10px;
-            background: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-            font-size: 16px;
-            font-weight: 500;
-            color: var(--text-dark);
-        }
-        
-        .type-btn.selected {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
-            border-color: var(--primary);
-            color: white;
-        }
-        
-        .selected-list {
-            max-height: 250px;
-            overflow-y: auto;
-            margin: 15px 0;
-        }
-        
-        .selected-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 15px;
-            background: white;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            border-left: 4px solid var(--secondary);
-        }
-        
-        .selected-char {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, var(--secondary) 0%, #339af0 100%);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
-        
-        .selected-controls {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .selected-quantity {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .qty-btn {
-            width: 24px;
-            height: 24px;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            background: white;
-            color: var(--text-dark);
-            cursor: pointer;
-        }
-        
-        .action-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 25px;
-        }
-        
-        .btn {
-            padding: 16px 25px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, #ff8787 100%);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 7px 20px rgba(255, 107, 107, 0.3);
-        }
-        
-        .btn-secondary {
-            background: #495057;
-            color: white;
-        }
-        
-        .result-container {
-            background: linear-gradient(135deg, #e6f7ff 0%, #b3e0ff 100%);
-            border-radius: 15px;
-            padding: 25px;
-            margin: 30px;
-            display: none;
-        }
-        
-        .result-container.show {
-            display: block;
-            animation: slideIn 0.5s ease;
-        }
-        
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .result-code {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            font-family: 'Courier New', monospace;
-            font-size: 18px;
-            margin: 15px 0;
-            border-left: 5px solid var(--secondary);
-            word-break: break-all;
-        }
-        
-        .copy-success {
-            color: var(--success);
-            margin-left: 10px;
-            display: none;
-        }
-        
-        .copy-success.show {
-            display: inline;
-        }
-        
-        /* 响应式调整 */
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif; background: linear-gradient(135deg, #f5f7fa 0%, #e3e8f0 100%); min-height: 100vh; color: var(--text-dark); line-height: 1.5; }
+        .container { max-width: 1400px; margin: 0 auto; background: white; min-height: 100vh; }
+        .header { background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%); color: white; padding: 25px 30px; text-align: center; }
+        .header h1 { font-size: 28px; margin-bottom: 10px; }
+        .steps { display: flex; justify-content: center; gap: 40px; margin: 25px 20px; padding: 0 20px; flex-wrap: wrap; }
+        .step { display: flex; align-items: center; gap: 12px; color: #666; }
+        .step.active { color: var(--primary); font-weight: bold; }
+        .step-number { width: 36px; height: 36px; background: #e9ecef; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+        .step.active .step-number { background: var(--primary); color: white; }
+        .content { display: grid; grid-template-columns: 1fr 350px; gap: 0; min-height: 600px; }
+        @media (max-width: 992px) { .content { grid-template-columns: 1fr; } }
+        .selection-area { padding: 25px; border-right: 1px solid var(--border); }
+        .section { margin-bottom: 30px; }
+        .section-title { font-size: 20px; color: var(--dark); margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--primary); display: flex; align-items: center; gap: 10px; }
+        .preset-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; margin-bottom: 25px; }
+        .preset-item { background: white; border: 2px solid var(--border); border-radius: 12px; padding: 15px; cursor: pointer; transition: all 0.3s ease; text-align: center; }
+        .preset-item:hover { border-color: var(--secondary); transform: translateY(-3px); }
+        .preset-item.selected { background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-color: var(--secondary); }
+        .preset-code { font-size: 20px; font-weight: bold; margin-bottom: 8px; color: var(--text-dark); }
+        .pattern-container { display: flex; justify-content: center; gap: 8px; margin: 8px 0; }
+        .pattern-char { width: 24px; height: 24px; background: var(--secondary); color: white; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; }
+        .right-area { display: flex; flex-direction: column; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); }
+        .image-display-area { padding: 20px; background: white; margin: 20px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: center; }
+        .image-display-area h3 { margin-bottom: 15px; color: var(--dark); display: flex; align-items: center; gap: 10px; justify-content: center; }
+        .order-area { padding: 20px; flex-grow: 1; }
+        .type-selector, .order-summary { background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .type-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
+        .type-btn { padding: 15px; border: 2px solid var(--border); border-radius: 10px; background: white; cursor: pointer; transition: all 0.3s ease; text-align: center; font-size: 16px; font-weight: 500; color: var(--text-dark); }
+        .type-btn.selected { background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%); border-color: var(--primary); color: white; }
+        .selected-list { max-height: 250px; overflow-y: auto; margin: 15px 0; }
+        .selected-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 15px; background: white; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid var(--secondary); }
+        .selected-char { width: 36px; height: 36px; background: linear-gradient(135deg, var(--secondary) 0%, #339af0 100%); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+        .selected-controls { display: flex; align-items: center; gap: 15px; }
+        .selected-quantity { display: flex; align-items: center; gap: 8px; }
+        .qty-btn { width: 24px; height: 24px; border: 1px solid var(--border); border-radius: 4px; background: white; color: var(--text-dark); cursor: pointer; }
+        .action-buttons { display: flex; flex-direction: column; gap: 15px; margin-top: 25px; }
+        .btn { padding: 16px 25px; border: none; border-radius: 10px; cursor: pointer; font-size: 16px; font-weight: 600; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .btn-primary { background: linear-gradient(135deg, var(--primary) 0%, #ff8787 100%); color: white; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 7px 20px rgba(255, 107, 107, 0.3); }
+        .btn-secondary { background: #495057; color: white; }
+        .result-container { background: linear-gradient(135deg, #e6f7ff 0%, #b3e0ff 100%); border-radius: 15px; padding: 25px; margin: 30px; display: none; }
+        .result-container.show { display: block; animation: slideIn 0.5s ease; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .result-code { background: white; padding: 20px; border-radius: 10px; font-family: 'Courier New', monospace; font-size: 18px; margin: 15px 0; border-left: 5px solid var(--secondary); word-break: break-all; }
+        .copy-success { color: var(--success); margin-left: 10px; display: none; }
+        .copy-success.show { display: inline; }
         @media (max-width: 768px) {
-            .content {
-                grid-template-columns: 1fr;
-            }
-            
-            .selection-area {
-                border-right: none;
-                border-bottom: 1px solid var(--border);
-            }
-            
-            .preset-grid {
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            }
-            
-            .image-display-area {
-                margin: 15px;
-                order: -1; /* 在移动端，图片区显示在最前面 */
-            }
+            .content { grid-template-columns: 1fr; }
+            .selection-area { border-right: none; border-bottom: 1px solid var(--border); }
+            .preset-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+            .image-display-area { margin: 15px; order: -1; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- 头部 -->
         <div class="header">
             <h1><i class="fas fa-sticky-note"></i> 纹身贴智能选购系统</h1>
             <p>选择组合·设置数量·生成备注·轻松购买</p>
         </div>
-        
-        <!-- 步骤指示器 -->
         <div class="steps">
-            <div class="step active">
-                <div class="step-number">1</div>
-                <span>选择组合</span>
-            </div>
-            <div class="step">
-                <div class="step-number">2</div>
-                <span>设置数量</span>
-            </div>
-            <div class="step">
-                <div class="step-number">3</div>
-                <span>生成订单</span>
-            </div>
+            <div class="step active"><div class="step-number">1</div><span>选择组合</span></div>
+            <div class="step"><div class="step-number">2</div><span>设置数量</span></div>
+            <div class="step"><div class="step-number">3</div><span>生成订单</span></div>
         </div>
-        
-        <!-- 主要内容区 -->
         <div class="content">
-            <!-- 左侧选择区 -->
             <div class="selection-area">
                 <div class="section">
-                    <h2 class="section-title">
-                        <i class="fas fa-th-large"></i>
-                        <span>31种预设组合</span>
-                    </h2>
-                    <p style="color: var(--text-light); margin-bottom: 20px;">
-                        点击组合选择，右侧可调整数量。支持重复选择相同组合。
-                    </p>
-                    <div class="preset-grid" id="presetContainer">
-                        <!-- 预设组合由JS生成 -->
-                    </div>
+                    <h2 class="section-title"><i class="fas fa-th-large"></i><span>31种预设组合</span></h2>
+                    <p style="color: var(--text-light); margin-bottom: 20px;">点击组合选择，右侧可调整数量。支持重复选择相同组合。</p>
+                    <div class="preset-grid" id="presetContainer"></div>
                 </div>
             </div>
-            
-            <!-- 右侧区域 -->
             <div class="right-area">
-                <!-- 图片展示区 -->
                 <div class="image-display-area">
                     <h3><i class="fas fa-images"></i> 效果展示区</h3>
-                    <div class="image-placeholder">
-                        <i class="fas fa-image"></i>
-                        <p>产品效果图 / 示例图</p>
-                        <p style="font-size: 14px; margin-top: 10px;">将图片上传后显示在这里</p>
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <img id="productImage"
+                             src="https://cdn.jsdelivr.net/gh/2945935725/tattoo-selector@main/%E6%96%B0%E7%89%88.jpg"
+                             alt="纹身贴效果展示"
+                             style="width: 100%; max-width: 600px; height: auto; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border: 1px solid #eee;">
+                        <p style="color: #666; margin-top: 10px; font-size: 14px;">产品效果参考图</p>
                     </div>
-                    
-                    <!-- 图片上传指引 -->
                     <div class="image-upload-guide">
-                        <h4><i class="fas fa-info-circle"></i> 如何上传您的图片？</h4>
-                        <ol>
-                            <li><strong>准备图片</strong>：将您的纹身贴效果图保存为 JPG 或 PNG 格式</li>
-                            <li><strong>上传到图床</strong>：访问免费图床网站（如 imgbb.com、sm.ms）</li>
-                            <li><strong>获取链接</strong>：上传后复制图片的“直链”URL</li>
-                            <li><strong>替换代码</strong>：用复制的URL替换下方代码中的 `YOUR_IMAGE_URL`</li>
-                        </ol>
-                        <p style="margin-top: 10px; font-size: 13px; color: var(--primary);">
-                            💡 提示：图片宽度建议在 800px 左右，保持清晰且不过大。
-                        </p>
+                        <h4><i class="fas fa-bolt"></i> 稳定加速访问</h4>
+                        <p style="color: var(--text-light); font-size: 14px; line-height: 1.5;">此图片已通过专业的 CDN 服务加速，确保快速、稳定加载。</p>
+                        <p style="color: var(--text-light); font-size: 13px; margin-top: 10px;">💡 未来如需更换图片，只需将新图片上传至仓库，并将上方链接中的 <code>%E6%96%B0%E7%89%88.jpg</code> 替换为新的文件名即可。</p>
                     </div>
                 </div>
-                
-                <!-- 订单区 -->
                 <div class="order-area">
                     <div class="type-selector">
-                        <h3 style="margin-bottom: 15px; color: var(--dark);">
-                            <i class="fas fa-palette"></i> 选择款式
-                        </h3>
+                        <h3 style="margin-bottom: 15px; color: var(--dark);"><i class="fas fa-palette"></i> 选择款式</h3>
                         <div class="type-buttons">
-                            <button class="type-btn selected" data-type="water" onclick="selectType(this)">
-                                <i class="fas fa-tint"></i> 水印款
-                            </button>
-                            <button class="type-btn" data-type="herbal" onclick="selectType(this)">
-                                <i class="fas fa-leaf"></i> 草本款
-                            </button>
+                            <button class="type-btn selected" data-type="water" onclick="selectType(this)"><i class="fas fa-tint"></i> 水印款</button>
+                            <button class="type-btn" data-type="herbal" onclick="selectType(this)"><i class="fas fa-leaf"></i> 草本款</button>
                         </div>
                     </div>
-                    
                     <div class="order-summary">
-                        <h3 style="margin-bottom: 15px; color: var(--dark);">
-                            <i class="fas fa-shopping-cart"></i> 订单汇总
-                        </h3>
-                        
+                        <h3 style="margin-bottom: 15px; color: var(--dark);"><i class="fas fa-shopping-cart"></i> 订单汇总</h3>
                         <div id="selectedList" class="selected-list">
                             <div style="text-align: center; padding: 40px 20px; color: var(--text-light);">
                                 <i class="fas fa-shopping-basket" style="font-size: 48px; color: #ced4da; margin-bottom: 15px;"></i>
@@ -495,7 +116,6 @@
                                 <p style="font-size: 14px; margin-top: 10px;">点击左侧组合开始选择</p>
                             </div>
                         </div>
-                        
                         <div style="display: flex; justify-content: space-between; padding: 12px 0; border-top: 1px solid var(--border);">
                             <span style="color: var(--text-light);">款式：</span>
                             <span style="font-weight: 600;" id="selectedTypeDisplay">水印款</span>
@@ -509,380 +129,147 @@
                             <span style="font-weight: 600;" id="totalCombos">0 种</span>
                         </div>
                     </div>
-                    
                     <div class="action-buttons">
-                        <button class="btn btn-primary" onclick="generateOrder()">
-                            <i class="fas fa-file-invoice"></i> 生成购买备注
-                        </button>
-                        <button class="btn btn-secondary" onclick="resetAll()">
-                            <i class="fas fa-redo"></i> 重新开始
-                        </button>
+                        <button class="btn btn-primary" onclick="generateOrder()"><i class="fas fa-file-invoice"></i> 生成购买备注</button>
+                        <button class="btn btn-secondary" onclick="resetAll()"><i class="fas fa-redo"></i> 重新开始</button>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <!-- 结果展示区 -->
         <div class="result-container" id="resultContainer">
-            <h3 style="margin-bottom: 15px; color: var(--dark);">
-                <i class="fas fa-clipboard-check"></i> 购买备注已生成
-            </h3>
-            <p style="color: var(--text-light); margin-bottom: 15px;">
-                请复制以下内容到淘宝订单备注中：
-            </p>
+            <h3 style="margin-bottom: 15px; color: var(--dark);"><i class="fas fa-clipboard-check"></i> 购买备注已生成</h3>
+            <p style="color: var(--text-light); margin-bottom: 15px;">请复制以下内容到淘宝订单备注中：</p>
             <div class="result-code" id="resultCode"></div>
             <div style="display: flex; gap: 15px; margin-top: 20px;">
-                <button class="btn btn-primary" onclick="copyToClipboard()">
-                    <i class="fas fa-copy"></i> 复制备注
-                </button>
-                <button class="btn btn-secondary" onclick="closeResult()">
-                    <i class="fas fa-times"></i> 关闭
-                </button>
-                <span class="copy-success" id="copySuccess">
-                    <i class="fas fa-check-circle"></i> 已复制到剪贴板
-                </span>
+                <button class="btn btn-primary" onclick="copyToClipboard()"><i class="fas fa-copy"></i> 复制备注</button>
+                <button class="btn btn-secondary" onclick="closeResult()"><i class="fas fa-times"></i> 关闭</button>
+                <span class="copy-success" id="copySuccess"><i class="fas fa-check-circle"></i> 已复制到剪贴板</span>
             </div>
         </div>
     </div>
 
     <script>
-        // 产品配置数据
         const productConfig = {
             presets: [
-                { code: "AB", pattern: ["骚", "狗"], desc: "" },
-                { code: "AG", pattern: ["骚", "逼"], desc: "" },
-                { code: "AI", pattern: ["骚", "货"], desc: "" },
-                { code: "BE", pattern: ["狗", "奴"], desc: "" },
-                { code: "BH", pattern: ["狗", "屌"], desc: "" },
-                { code: "BG", pattern: ["狗", "逼"], desc: "" },
-                { code: "CE", pattern: ["锁", "奴"], desc: "" },
-                { code: "CB", pattern: ["锁", "狗"], desc: "" },
-                { code: "CH", pattern: ["锁", "屌"], desc: "" },
-                { code: "CO", pattern: ["锁", "废"], desc: "" },
-                { code: "FB", pattern: ["傻", "狗"], desc: "" },
-                { code: "FG", pattern: ["傻", "逼"], desc: "" },
-                { code: "DG", pattern: ["贱", "逼"], desc: "" },
-                { code: "DB", pattern: ["贱", "狗"], desc: "" },
-                { code: "DI", pattern: ["贱", "货"], desc: "" },
-                { code: "DJ", pattern: ["贱", "畜"], desc: "" },
-                { code: "JK", pattern: ["畜", "牲"], desc: "" },
-                { code: "OH", pattern: ["废", "屌"], desc: "" },
-                { code: "ME", pattern: ["性", "奴"], desc: "" },
-                { code: "TE", pattern: ["犬", "奴"], desc: "" },
-                { code: "NE", pattern: ["厕", "奴"], desc: "" },
-                { code: "LB", pattern: ["母", "狗"], desc: "" },
-                { code: "P²P²", pattern: ["欠屮", "欠屮"], desc: "特殊款" },
-                { code: "Q²Q²", pattern: ["尿壶", "尿壶"], desc: "特殊款" },
-                { code: "RST", pattern: ["人", "型", "犬"], desc: "三件套" },
-                { code: "U²U²U²", pattern: ["肉便器", "肉便器", "肉便器"], desc: "三联款" },
-                { code: "VV", pattern: ["爪印", "爪印"], desc: "爪印" },
-                { code: "WW", pattern: ["FUME", "FUME"], desc: "FUME" },
-                { code: "XX", pattern: ["禁止射精", "禁止射精"], desc: "禁止射精" },
-                { code: "YY", pattern: ["主人玩物", "主人玩物"], desc: "主人玩物" },
+                { code: "AB", pattern: ["骚", "狗"], desc: "" }, { code: "AG", pattern: ["骚", "逼"], desc: "" }, { code: "AI", pattern: ["骚", "货"], desc: "" },
+                { code: "BE", pattern: ["狗", "奴"], desc: "" }, { code: "BH", pattern: ["狗", "屌"], desc: "" }, { code: "BG", pattern: ["狗", "逼"], desc: "" },
+                { code: "CE", pattern: ["锁", "奴"], desc: "" }, { code: "CB", pattern: ["锁", "狗"], desc: "" }, { code: "CH", pattern: ["锁", "屌"], desc: "" },
+                { code: "CO", pattern: ["锁", "废"], desc: "" }, { code: "FB", pattern: ["傻", "狗"], desc: "" }, { code: "FG", pattern: ["傻", "逼"], desc: "" },
+                { code: "DG", pattern: ["贱", "逼"], desc: "" }, { code: "DB", pattern: ["贱", "狗"], desc: "" }, { code: "DI", pattern: ["贱", "货"], desc: "" },
+                { code: "DJ", pattern: ["贱", "畜"], desc: "" }, { code: "JK", pattern: ["畜", "牲"], desc: "" }, { code: "OH", pattern: ["废", "屌"], desc: "" },
+                { code: "ME", pattern: ["性", "奴"], desc: "" }, { code: "TE", pattern: ["犬", "奴"], desc: "" }, { code: "NE", pattern: ["厕", "奴"], desc: "" },
+                { code: "LB", pattern: ["母", "狗"], desc: "" }, { code: "P²P²", pattern: ["欠屮", "欠屮"], desc: "特殊款" }, { code: "Q²Q²", pattern: ["尿壶", "尿壶"], desc: "特殊款" },
+                { code: "RST", pattern: ["人", "型", "犬"], desc: "三件套" }, { code: "U²U²U²", pattern: ["肉便器", "肉便器", "肉便器"], desc: "三联款" },
+                { code: "VV", pattern: ["爪印", "爪印"], desc: "爪印" }, { code: "WW", pattern: ["FUME", "FUME"], desc: "FUME" },
+                { code: "XX", pattern: ["禁止射精", "禁止射精"], desc: "禁止射精" }, { code: "YY", pattern: ["主人玩物", "主人玩物"], desc: "主人玩物" },
                 { code: "ZZ", pattern: ["合格证", "合格证"], desc: "合格证" }
             ]
         };
-
-        // 状态管理
-        let state = {
-            selectedType: 'water',
-            selectedItems: [],
-            nextId: 1
-        };
-
-        // 初始化页面
+        let state = { selectedType: 'water', selectedItems: [], nextId: 1 };
         function initPage() {
             const presetContainer = document.getElementById('presetContainer');
             productConfig.presets.forEach((preset, index) => {
                 const div = document.createElement('div');
-                div.className = 'preset-item';
-                div.dataset.id = `preset_${index}`;
-                div.dataset.code = preset.code;
-                
-                // 创建图案显示
-                const patternHtml = preset.pattern.map(char => 
-                    `<span class="pattern-char">${char}</span>`
-                ).join('');
-                
-                // 处理上标显示
-                let codeDisplay = preset.code;
-                if (preset.code.includes('²')) {
-                    codeDisplay = preset.code.replace('²', '<sup>2</sup>');
-                }
-                
-                div.innerHTML = `
-                    <div class="preset-code">${codeDisplay}</div>
-                    <div class="pattern-container">${patternHtml}</div>
-                    <div style="font-size: 12px; color: #666; margin-top: 5px;">${preset.desc || `组合${index + 1}`}</div>
-                `;
-                
+                div.className = 'preset-item'; div.dataset.id = `preset_${index}`; div.dataset.code = preset.code;
+                const patternHtml = preset.pattern.map(char => `<span class="pattern-char">${char}</span>`).join('');
+                let codeDisplay = preset.code; if (preset.code.includes('²')) { codeDisplay = preset.code.replace('²', '<sup>2</sup>'); }
+                div.innerHTML = `<div class="preset-code">${codeDisplay}</div><div class="pattern-container">${patternHtml}</div><div style="font-size: 12px; color: #666; margin-top: 5px;">${preset.desc || `组合${index + 1}`}</div>`;
                 div.onclick = () => selectItem(preset.code, preset.pattern);
                 presetContainer.appendChild(div);
             });
-
-            updateSelectedDisplay();
-            updateSteps(1);
+            updateSelectedDisplay(); updateSteps(1);
         }
-
-        // 选择项目 - 已移除自动滚动代码
         function selectItem(code, pattern) {
-            const existingIndex = state.selectedItems.findIndex(item => 
-                item.code === code
-            );
-            
-            if (existingIndex >= 0) {
-                state.selectedItems[existingIndex].quantity++;
-            } else {
-                state.selectedItems.push({
-                    id: state.nextId++,
-                    code: code,
-                    pattern: pattern,
-                    quantity: 1
-                });
-            }
-            
+            const existingIndex = state.selectedItems.findIndex(item => item.code === code);
+            if (existingIndex >= 0) { state.selectedItems[existingIndex].quantity++; } 
+            else { state.selectedItems.push({ id: state.nextId++, code: code, pattern: pattern, quantity: 1 }); }
             updateSelectedDisplay();
-            
-            // 只添加选中效果，不移除自动滚动
-            const selector = `[data-code="${code}"]`;
-            const element = document.querySelector(selector);
-            if (element) {
-                element.classList.add('selected');
-                setTimeout(() => element.classList.remove('selected'), 300);
-            }
-            
+            const selector = `[data-code="${code}"]`; const element = document.querySelector(selector);
+            if (element) { element.classList.add('selected'); setTimeout(() => element.classList.remove('selected'), 300); }
             updateSteps(2);
         }
-
-        // 更新已选项目显示
         function updateSelectedDisplay() {
-            const selectedList = document.getElementById('selectedList');
-            const totalPairs = document.getElementById('totalPairs');
-            const totalCombos = document.getElementById('totalCombos');
-            
+            const selectedList = document.getElementById('selectedList'); const totalPairs = document.getElementById('totalPairs'); const totalCombos = document.getElementById('totalCombos');
             if (state.selectedItems.length === 0) {
-                selectedList.innerHTML = `
-                    <div style="text-align: center; padding: 40px 20px; color: var(--text-light);">
-                        <i class="fas fa-shopping-basket" style="font-size: 48px; color: #ced4da; margin-bottom: 15px;"></i>
-                        <p>还未选择任何贴纸</p>
-                        <p style="font-size: 14px; margin-top: 10px;">点击左侧组合开始选择</p>
-                    </div>
-                `;
-                totalPairs.textContent = '0 对';
-                totalCombos.textContent = '0 种';
-                return;
+                selectedList.innerHTML = `<div style="text-align: center; padding: 40px 20px; color: var(--text-light);"><i class="fas fa-shopping-basket" style="font-size: 48px; color: #ced4da; margin-bottom: 15px;"></i><p>还未选择任何贴纸</p><p style="font-size: 14px; margin-top: 10px;">点击左侧组合开始选择</p></div>`;
+                totalPairs.textContent = '0 对'; totalCombos.textContent = '0 种'; return;
             }
-            
-            let totalPairsCount = 0;
-            state.selectedItems.forEach(item => {
-                totalPairsCount += item.quantity;
+            let totalPairsCount = 0; state.selectedItems.forEach(item => { totalPairsCount += item.quantity; });
+            let html = ''; state.selectedItems.forEach(item => {
+                const patternDisplay = Array.isArray(item.pattern) ? item.pattern.join('') : item.pattern;
+                html += `<div class="selected-item" data-id="${item.id}"><div style="display: flex; align-items: center; gap: 15px;"><div class="selected-char">${item.code}</div><div><div style="font-weight: 600; color: var(--text-dark);">${item.code}</div><div style="font-size: 13px; color: var(--text-light);">${patternDisplay}</div></div></div><div class="selected-controls"><div class="selected-quantity"><button class="qty-btn" onclick="changeQuantity(${item.id}, -1)"><i class="fas fa-minus"></i></button><span style="min-width: 30px; text-align: center; font-weight: bold;">${item.quantity}</span><button class="qty-btn" onclick="changeQuantity(${item.id}, 1)"><i class="fas fa-plus"></i></button></div><button style="color: #ff6b6b; background: none; border: none; cursor: pointer; font-size: 16px; padding: 5px;" onclick="removeItem(${item.id})"><i class="fas fa-times"></i></button></div></div>`;
             });
-            
-            let html = '';
-            state.selectedItems.forEach(item => {
-                const patternDisplay = Array.isArray(item.pattern) 
-                    ? item.pattern.join('') 
-                    : item.pattern;
-                    
-                html += `
-                    <div class="selected-item" data-id="${item.id}">
-                        <div style="display: flex; align-items: center; gap: 15px;">
-                            <div class="selected-char">${item.code}</div>
-                            <div>
-                                <div style="font-weight: 600; color: var(--text-dark);">${item.code}</div>
-                                <div style="font-size: 13px; color: var(--text-light);">${patternDisplay}</div>
-                            </div>
-                        </div>
-                        <div class="selected-controls">
-                            <div class="selected-quantity">
-                                <button class="qty-btn" onclick="changeQuantity(${item.id}, -1)">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <span style="min-width: 30px; text-align: center; font-weight: bold;">${item.quantity}</span>
-                                <button class="qty-btn" onclick="changeQuantity(${item.id}, 1)">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                            <button style="color: #ff6b6b; background: none; border: none; cursor: pointer; font-size: 16px; padding: 5px;" onclick="removeItem(${item.id})">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            selectedList.innerHTML = html;
-            totalPairs.textContent = `${totalPairsCount} 对`;
-            totalCombos.textContent = `${state.selectedItems.length} 种`;
+            selectedList.innerHTML = html; totalPairs.textContent = `${totalPairsCount} 对`; totalCombos.textContent = `${state.selectedItems.length} 种`;
         }
-
-        // 调整项目数量
         function changeQuantity(id, delta) {
             const index = state.selectedItems.findIndex(item => item.id === id);
             if (index >= 0) {
                 const newQuantity = state.selectedItems[index].quantity + delta;
-                
-                if (newQuantity <= 0) {
-                    state.selectedItems.splice(index, 1);
-                } else {
-                    state.selectedItems[index].quantity = newQuantity;
-                }
-                
-                updateSelectedDisplay();
-                updateSteps(state.selectedItems.length > 0 ? 2 : 1);
+                if (newQuantity <= 0) { state.selectedItems.splice(index, 1); } 
+                else { state.selectedItems[index].quantity = newQuantity; }
+                updateSelectedDisplay(); updateSteps(state.selectedItems.length > 0 ? 2 : 1);
             }
         }
-
-        // 移除项目
         function removeItem(id) {
             const index = state.selectedItems.findIndex(item => item.id === id);
             if (index >= 0) {
-                const item = state.selectedItems[index];
-                const selector = `[data-code="${item.code}"]`;
-                const element = document.querySelector(selector);
-                if (element) {
-                    element.classList.remove('selected');
-                }
-                
-                state.selectedItems.splice(index, 1);
-                updateSelectedDisplay();
-                updateSteps(state.selectedItems.length > 0 ? 2 : 1);
+                const item = state.selectedItems[index]; const selector = `[data-code="${item.code}"]`; const element = document.querySelector(selector);
+                if (element) { element.classList.remove('selected'); }
+                state.selectedItems.splice(index, 1); updateSelectedDisplay(); updateSteps(state.selectedItems.length > 0 ? 2 : 1);
             }
         }
-
-        // 选择款式
         function selectType(button) {
-            document.querySelectorAll('.type-btn').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-            
-            button.classList.add('selected');
-            state.selectedType = button.dataset.type;
-            
-            document.getElementById('selectedTypeDisplay').textContent = 
-                state.selectedType === 'water' ? '水印款' : '草本款';
-            
+            document.querySelectorAll('.type-btn').forEach(btn => { btn.classList.remove('selected'); });
+            button.classList.add('selected'); state.selectedType = button.dataset.type;
+            document.getElementById('selectedTypeDisplay').textContent = state.selectedType === 'water' ? '水印款' : '草本款';
             updateSteps(2);
         }
-
-        // 生成订单
+        // === 关键修改：生成订单的函数，备注格式已更新 ===
         function generateOrder() {
-            if (state.selectedItems.length === 0) {
-                alert('请先选择至少一个贴纸组合');
-                return;
-            }
-            
+            if (state.selectedItems.length === 0) { alert('请先选择至少一个贴纸组合'); return; }
             const totalPairs = state.selectedItems.reduce((sum, item) => sum + item.quantity, 0);
-            
-            const combosDesc = state.selectedItems.map(item => {
-                if (item.quantity > 1) {
-                    return `${item.code}×${item.quantity}`;
-                }
-                return item.code;
-            }).join('、');
-            
-            const typeName = state.selectedType === 'water' ? '水印款' : '草本款';
-            const note = `${typeName}，${totalPairs}对，组合：${combosDesc}`;
-            
+            const combosDesc = state.selectedItems.map(item => { if (item.quantity > 1) { return `${item.code}×${item.quantity}`; } return item.code; }).join('、');
+            // 新格式：款式 + 对数 + 冒号 + 组合列表
+            const typeName = state.selectedType === 'water' ? '水印' : '草本';
+            const note = `${typeName}${totalPairs}对：${combosDesc}`;
             document.getElementById('resultCode').textContent = note;
             document.getElementById('resultContainer').classList.add('show');
             updateSteps(3);
         }
-
-        // 关闭结果
-        function closeResult() {
-            document.getElementById('resultContainer').classList.remove('show');
-        }
-
-        // 复制到剪贴板
+        function closeResult() { document.getElementById('resultContainer').classList.remove('show'); }
         function copyToClipboard() {
             const text = document.getElementById('resultCode').textContent;
-            
             if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(text).then(() => {
-                    showCopySuccess();
-                }).catch(err => {
-                    fallbackCopyText(text);
-                });
-            } else {
-                fallbackCopyText(text);
-            }
+                navigator.clipboard.writeText(text).then(() => { showCopySuccess(); }).catch(err => { fallbackCopyText(text); });
+            } else { fallbackCopyText(text); }
         }
-
         function fallbackCopyText(text) {
-            const textArea = document.createElement("textarea");
-            textArea.value = text;
-            document.body.appendChild(textArea);
-            textArea.select();
-            
-            try {
-                document.execCommand('copy');
-                showCopySuccess();
-            } catch (err) {
-                alert('复制失败，请手动复制');
-            }
-            
+            const textArea = document.createElement("textarea"); textArea.value = text; document.body.appendChild(textArea); textArea.select();
+            try { document.execCommand('copy'); showCopySuccess(); } catch (err) { alert('复制失败，请手动复制'); }
             document.body.removeChild(textArea);
         }
-
         function showCopySuccess() {
-            const success = document.getElementById('copySuccess');
-            success.classList.add('show');
-            setTimeout(() => {
-                success.classList.remove('show');
-            }, 2000);
+            const success = document.getElementById('copySuccess'); success.classList.add('show');
+            setTimeout(() => { success.classList.remove('show'); }, 2000);
         }
-
-        // 重置所有选择
         function resetAll() {
-            if (state.selectedItems.length > 0 && !confirm('确定要清空所有选择吗？')) {
-                return;
-            }
-            
-            state = {
-                selectedType: 'water',
-                selectedItems: [],
-                nextId: 1
-            };
-            
-            document.querySelectorAll('.preset-item').forEach(item => {
-                item.classList.remove('selected');
-            });
-            
-            document.querySelectorAll('.type-btn').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-            
+            if (state.selectedItems.length > 0 && !confirm('确定要清空所有选择吗？')) { return; }
+            state = { selectedType: 'water', selectedItems: [], nextId: 1 };
+            document.querySelectorAll('.preset-item').forEach(item => { item.classList.remove('selected'); });
+            document.querySelectorAll('.type-btn').forEach(btn => { btn.classList.remove('selected'); });
             document.querySelector('[data-type="water"]').classList.add('selected');
             document.getElementById('selectedTypeDisplay').textContent = '水印款';
-            
             document.getElementById('resultContainer').classList.remove('show');
-            
-            updateSelectedDisplay();
-            updateSteps(1);
+            updateSelectedDisplay(); updateSteps(1);
         }
-
-        // 更新步骤显示
         function updateSteps(activeStep) {
             document.querySelectorAll('.step').forEach((step, index) => {
-                if (index + 1 === activeStep) {
-                    step.classList.add('active');
-                } else if (index + 1 < activeStep) {
-                    step.classList.add('active');
-                } else {
-                    step.classList.remove('active');
-                }
+                if (index + 1 === activeStep) { step.classList.add('active'); } 
+                else if (index + 1 < activeStep) { step.classList.add('active'); } 
+                else { step.classList.remove('active'); }
             });
         }
-
-        // 页面加载完成后初始化
         window.onload = initPage;
     </script>
 </body>
 </html>
-
-
-
-
-
-
